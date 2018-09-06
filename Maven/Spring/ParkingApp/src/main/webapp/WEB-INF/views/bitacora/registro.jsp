@@ -7,9 +7,8 @@
 
 <head>
 	<title>Parking Application by Arct-Applications</title>
-	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
-    <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-	
+	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
+    <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 
@@ -36,7 +35,7 @@
 <div class="container">
     
 	<c:if test="${mostrarFormulario}">
-	  <c:url var="agregarRegistro" value="/agregarreg" ></c:url>
+	  <c:url var="agregarRegistro" value="/bitacora/ejecutar" ></c:url>
 	  <form:form action="${agregarRegistro}" modelAttribute="registro" method="POST">
 		<table>
 			<c:if test="${registro.idRegistro > 0}">
@@ -123,12 +122,6 @@
 	  </form:form>
 	</c:if>
 
-  <p>
-  	<!-- <a class="btn btn-primary" href="agregarreg" role="button">Agregar</a> -->
-  	
-	
-  </p>
-  
   <c:if test="${mostrarResumenBitacora}">
 	<h5>Lista de Registros</h5>
 	<table class="tg">

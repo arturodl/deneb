@@ -50,12 +50,12 @@
 				<td>${registro.horaSalida}</td>					
 				<td>${registro.vehiculo.noPlaca}</td>
 				<c:if test="${mostrarEditar}">
-					<td><a href="<c:url value='/mostrarRegistro/${registro.idRegistro}' />" >Editar</a></td>
+					<td><a href="<c:url value='/bitacora/mostrarRegistro/${registro.idRegistro}' />" >Editar</a></td>
 				</c:if>
 			</tr>
 		</c:forEach>
 	</table>
-	<a class="btn btn-primary" href="<c:url value='/index' />" role="button">Regresar</a>
+	<a class="btn btn-primary" href="<c:url value="/index" />" role="button">Regresar</a>
   <hr>
   <footer>
 	<p>Arct-Applications</p>

@@ -5,7 +5,7 @@
 
 <head>
 	<title>Parking Application by Arct-Applications</title>
-	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
+	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
 	<script src="<c:url value="/resources/js/bootstrap.min.js" />" > </script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
@@ -31,9 +31,9 @@
 	<div class="col-md-4">
 		<p>Bitacora</p>
 		<ul>
-			<li> <a class="btn btn-default" href="regentrada" role="button">Registrar Entrada</a> </li>
-			<li> <a class="btn btn-default" href="regsalida" role="button">Registrar Salida</a> </li>
-			<li> <a class="btn btn-default" href="resumen" role="button">Ver Resumen</a> </li>	
+			<li> <a class="btn btn-default" href="<c:url value="/bitacora/gestionar" />" role="button">Registrar Entrada</a> </li>
+			<li> <a class="btn btn-default" href="<c:url value="/bitacora/resumen" />" role="button">Registrar Salida</a> </li>
+			<li> <a class="btn btn-default" href="<c:url value="/bitacora/resumen" />" role="button">Ver Resumen</a> </li>	
 		</ul>
 	</div>
 	<div class="col-md-4">

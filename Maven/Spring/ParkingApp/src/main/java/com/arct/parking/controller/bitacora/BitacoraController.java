@@ -27,7 +27,8 @@ import com.arct.parking.service.bitacora.BitacoraService;
 import com.arct.parking.service.vehiculo.VehiculoService;
 
 @Controller
-public class RegistroController {
+@RequestMapping(value="/bitacora")
+public class BitacoraController {
 	
 	@Autowired
 	private BitacoraService bitacoraService;
@@ -39,12 +40,20 @@ public class RegistroController {
 	public void bindingPreparation(WebDataBinder binder) {
 	  DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	  CustomDateEditor orderDateEditor = new CustomDateEditor(dateFormat, true);
-	  binder.registerCustomEditor(Date.class, orderDateEditor);
+	  binder.registerCustomEditor(Date.class, orderDateEditor);  
 	}
 	
-	@RequestMapping(value="/agregarreg", method=RequestMethod.POST)
-	public String agregarRegistro(ModelMap model, @ModelAttribute Registro registro) {
-		System.out.println("Administrar Registro");
+	@RequestMapping(value="/gestionar", method =RequestMethod.GET)
+	public String gestionarBitacora(ModelMap model, @ModelAttribute Registro registro) {
+		model.addAttribute("bienvenida","Bienvenido a la Pantalla de Registro de Entradas");
+		model.addAttribute("mostrarFormulario", true);
+		model.addAttribute("mostrarResumenBitacora", false);
+		return "bitacora/registro";
+	}
+	
+	@RequestMapping(value="/ejecutar", method=RequestMethod.POST)
+	public String ejecutarAccion(ModelMap model, @ModelAttribute Registro registro) {
+		System.out.println("Gestionar Registro");
 				
 		InsertarRegistroPeticion peticionInsertar = new InsertarRegistroPeticion();
 		ModificarRegistroPeticion peticionModificar = new ModificarRegistroPeticion();
@@ -109,10 +118,22 @@ public class RegistroController {
 		return "bitacora/registro";
 	}
 	
-	@RequestMapping(value="/index", method=RequestMethod.GET)
-	public String regresar(ModelMap model) {
-		model.addAttribute("bienvenida","Bienvenidos al Sistema de Gestion de Entradas y Salidas");
-		return "bienvenidos";
+	@RequestMapping(value="/resumen", method=RequestMethod.GET)
+	public String mostrarTodosLosRegistros(ModelMap model) {
+		System.out.println("Obteniendo Registros");
+		
+		ObtenerRegistroPeticion peticion = new ObtenerRegistroPeticion();
+		ObtenerRegistroRespuesta respuesta = null;
+		try {
+			respuesta = bitacoraService.obtenerRegistro(peticion);
+			model.addAttribute( "listaRegistros",respuesta.getListaRegistros() );
+			model.addAttribute("mostrarEditar", true);
+		}catch(Exception e) {
+			System.out.println("Hubo un error al invocar BitacoraService.obtenerRegistro: "+e.getCause());
+			e.printStackTrace();
+		}
+		
+		return "bitacora/resumen";
 	}
 	
 	public Registro obtenerRegistro(Registro registro) {
