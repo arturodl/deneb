@@ -17,7 +17,7 @@ import com.arct.parking.service.bitacora.BitacoraService;
 import com.arct.parking.service.vehiculo.VehiculoService;
 
 @Controller
-public class BienvenidosController {
+public class IndexController {
 	
 	@Autowired
 	private BitacoraService bitacoraService;
