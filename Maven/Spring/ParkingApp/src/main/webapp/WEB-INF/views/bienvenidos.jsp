@@ -5,8 +5,8 @@
 
 <head>
 	<title>Parking Application by Arct-Applications</title>
-	<link href="resources/css/bootstrap.min.css" rel="stylesheet" />
-	<script src="resources/js/bootstrap.min.js"></script>
+	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
+	<script src="<c:url value="/resources/js/bootstrap.min.js" />" > </script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 
