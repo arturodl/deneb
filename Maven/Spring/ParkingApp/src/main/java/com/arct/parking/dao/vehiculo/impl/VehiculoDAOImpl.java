@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.arct.parking.dao.vehiculo.VehiculoDAO;
@@ -14,9 +16,11 @@ import com.arct.parking.dto.ObtenerVehiculoPeticion;
 import com.arct.parking.dto.ObtenerVehiculoRespuesta;
 import com.arct.parking.model.Vehiculo;
 
-@Repository
+@Repository(value="vehiculoDAO")
 public class VehiculoDAOImpl implements VehiculoDAO {
 
+	@Autowired
+	@Qualifier(value="hibernate4AnnotatedSessionFactory")
 	private SessionFactory sessionFactory;
 	
 	@Override

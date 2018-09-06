@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.arct.parking.dao.bitacora.RegistroDAO;
@@ -14,9 +16,11 @@ import com.arct.parking.dto.ObtenerRegistroPeticion;
 import com.arct.parking.dto.ObtenerRegistroRespuesta;
 import com.arct.parking.model.Registro;
 
-@Repository
+@Repository(value="registroDAO")
 public class RegistroDAOImpl implements RegistroDAO {
 
+	@Autowired
+	@Qualifier(value="hibernate4AnnotatedSessionFactory")
 	private SessionFactory sessionFactory;
 	
 	@Override

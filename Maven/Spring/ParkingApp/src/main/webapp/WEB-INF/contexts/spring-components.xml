@@ -7,6 +7,9 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
+        
+    <!--  We ask spring to look at DAO package to looking for annotated pojos   -->
+    <context:component-scan base-package="com.arct.parking.dao" />
 	
 	<bean id="bitacoraService" class="com.arct.parking.service.bitacora.impl.BitacoraServiceImpl">
 		<property name="registroDAO" ref="registroDAO" > </property>

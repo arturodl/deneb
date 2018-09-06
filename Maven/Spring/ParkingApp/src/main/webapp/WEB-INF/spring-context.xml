@@ -8,8 +8,10 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<import resource="contexts/spring-services.xml"/>
-	<import resource="contexts/spring-daos.xml"/>
+	<!--  <import resource="contexts/spring-daos.xml"/>   -->	
 	<import resource="contexts/spring-tx.xml"/>
+	
+	<!--  inside components we have both services and daos   -->
+	<import resource="contexts/spring-components.xml"/>
 
 </beans>
