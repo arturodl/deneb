@@ -39,9 +39,9 @@
 	<div class="col-md-4">
 		<p>Vehiculos</p>
 		<ul>
-			<li> <a class="btn btn-default" href="registrarvehiculo" role="button">Agregar Vehiculo</a> </li>
-			<li> <a class="btn btn-default" href="#" role="button">Modificar Vehiculo</a> </li>
-			<li> <a class="btn btn-default" href="listadovehiculo" role="button">Ver Lista de Vehiculos</a> </li>
+			<li> <a class="btn btn-default" href="<c:url value="/vehiculo/gestionar" />" role="button">Agregar Vehiculo</a> </li>
+			<li> <a class="btn btn-default" href="<c:url value="/vehiculo/listado" />" role="button">Modificar Vehiculo</a> </li>
+			<li> <a class="btn btn-default" href="<c:url value="/vehiculo/listado" />" role="button">Ver Lista de Vehiculos</a> </li>
 		</ul>
 	</div>
 	<div class="col-md-4">

@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.arct.parking.dto.InsertarVehiculoPeticion;
 import com.arct.parking.dto.ModificarVehiculoPeticion;
+import com.arct.parking.dto.ObtenerVehiculoPeticion;
+import com.arct.parking.dto.ObtenerVehiculoRespuesta;
 import com.arct.parking.model.Vehiculo;
 import com.arct.parking.service.vehiculo.VehiculoService;
 
 @Controller
+@RequestMapping(value="/vehiculo", method=RequestMethod.POST)
 public class VehiculoController {
 	
 	@Autowired
@@ -32,9 +35,15 @@ public class VehiculoController {
 	  binder.registerCustomEditor(Date.class, orderDateEditor);
 	}
 	
-	@RequestMapping(value="/gestionarvehiculo", method=RequestMethod.POST)
-	public String gestionarVehiculo(ModelMap model, @ModelAttribute Vehiculo vehiculo) {
-		System.out.println("Gestionar Vehiculo");
+	@RequestMapping(value="/gestionar", method=RequestMethod.GET)
+	public String iniciar(ModelMap model, @ModelAttribute Vehiculo vehiculo) {
+		model.addAttribute("bienvenida","Bienvenido a la Pantalla de Registro de Vehiculos");
+		return "vehiculo/gestion";
+	}
+	
+	@RequestMapping(value="/ejecutar", method=RequestMethod.POST)
+	public String ejecutar(ModelMap model, @ModelAttribute Vehiculo vehiculo) {
+		System.out.println("Ejecutando acciones sobre el Vehiculo");
 				
 		InsertarVehiculoPeticion peticionInsertar = new InsertarVehiculoPeticion();
 		ModificarVehiculoPeticion peticionModificar = new ModificarVehiculoPeticion();
@@ -66,6 +75,25 @@ public class VehiculoController {
 								
 		return "vehiculo/gestion";
 	}	
+	
+	@RequestMapping(value="/listado", method =RequestMethod.GET)
+	public String mostrarVehiculos(ModelMap model) {
+		ObtenerVehiculoPeticion peticion = new ObtenerVehiculoPeticion();
+		ObtenerVehiculoRespuesta respuesta = null;
+		Vehiculo vehiculo = null;
+		try {
+			vehiculo = new Vehiculo();
+			peticion.setVehiculo(vehiculo);
+			respuesta = vehiculoService.obtenerVehiculo(peticion);
+			model.addAttribute("listaVehiculos",respuesta.getListaVehiculos() );
+			model.addAttribute("mostrarEditar",false);
+		}catch(Exception e) {
+			System.out.println("Hubo un error al invocar VehiculoService.obtenerVehiculo: "+e.getCause());
+			e.printStackTrace();
+		}
+		
+		return "vehiculo/listado";
+	}
 
 	public VehiculoService getVehiculoService() {
 		return vehiculoService;

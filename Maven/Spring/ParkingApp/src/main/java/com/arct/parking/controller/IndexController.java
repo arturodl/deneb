@@ -42,31 +42,6 @@ public class IndexController {
 		return "redirect:/bitacora/resumen";
 	}
 	
-	@RequestMapping(value="/registrarvehiculo", method=RequestMethod.GET)
-	public String registrarVehiculo(ModelMap model, @ModelAttribute Vehiculo vehiculo) {
-		model.addAttribute("bienvenida","Bienvenido a la Pantalla de Registro de Vehiculos");
-		return "vehiculo/gestion";
-	}
-	
-	@RequestMapping(value="/listadovehiculos", method =RequestMethod.GET)
-	public String listadoVehiculos(ModelMap model) {
-		ObtenerVehiculoPeticion peticion = new ObtenerVehiculoPeticion();
-		ObtenerVehiculoRespuesta respuesta = null;
-		Vehiculo vehiculo = null;
-		try {
-			vehiculo = new Vehiculo();
-			peticion.setVehiculo(vehiculo);
-			respuesta = vehiculoService.obtenerVehiculo(peticion);
-			model.addAttribute("listaVehiculos",respuesta.getListaVehiculos() );
-			model.addAttribute("mostrarEditar",false);
-		}catch(Exception e) {
-			System.out.println("Hubo un error al invocar VehiculoService.obtenerVehiculo: "+e.getCause());
-			e.printStackTrace();
-		}
-		
-		return "vehiculo/listado";
-	}
-	
 	public BitacoraService getBitacoraService() {
 		return bitacoraService;
 	}

@@ -34,7 +34,7 @@
 </div>
 
 <div class="container">    
-  <c:url var="gestionarVehiculo" value="/gestionarvehiculo" ></c:url>
+  <c:url var="gestionarVehiculo" value="/vehiculo/ejecutar" ></c:url>
   <form:form action="${gestionarVehiculo}" modelAttribute="vehiculo" method="POST">
 	<table>
 		<c:if test="${vehiculo.idVehiculo > 0}">
