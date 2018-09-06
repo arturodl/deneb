@@ -32,7 +32,7 @@ una vez que esta haya sido descargada entonces usa el cmd para acceder a la carp
 Para dar de alta la base de datos vas a necesitar MySQL, usa el workbench para dar de alta la base de datos con un usuario root y contrasena 123456,
 los scripts de la base de datos son los siguientes o buscalos dentro de la carpeta bdscripts de este proyecto:
 
-![ bdscript ](https://github.com/arturodl/backend-test/blob/arturolinares/ParkingApp/bdscripts/parkingdb.sql)
+![ bdscript ](https://github.com/arturodl/deneb/blob/master/Maven/Spring/ParkingApp/bdscripts/parkingdb.sql)
 
 # Usar siempre el happy path
 Al ser una aplicacion en su primera fase te recomendamos siempre usar el happy path ya que de momento la app no cuenta con validaciones a nivel de vista
@@ -46,7 +46,7 @@ ni a nivel de base de datos. Un happy path seria el siguiente:
 * Hacer click en el boton Ver Listado para ver todos los registros disponibles
 
 ### Algunas imagenes de la aplicacion corriendo
-![ Img1 ](https://github.com/arturodl/backend-test/blob/arturolinares/ParkingApp/img/Parking-app-arcts-01.jpg)
-![ Img2 ](https://github.com/arturodl/backend-test/blob/arturolinares/ParkingApp/img/Parking-app-arcts-02.jpg)
-![ Img3 ](https://github.com/arturodl/backend-test/blob/arturolinares/ParkingApp/img/Parking-app-arcts-03.jpg)
-![ Img4 ](https://github.com/arturodl/backend-test/blob/arturolinares/ParkingApp/img/Parking-app-arcts-04.jpg)
+![ Img1 ](https://github.com/arturodl/deneb/blob/master/Maven/Spring/ParkingApp/img/Parking-app-arcts-01.jpg)
+![ Img2 ](https://github.com/arturodl/deneb/blob/master/Maven/Spring/ParkingApp/img/Parking-app-arcts-02.jpg)
+![ Img3 ](https://github.com/arturodl/deneb/blob/master/Maven/Spring/ParkingApp/img/Parking-app-arcts-03.jpg)
+![ Img4 ](https://github.com/arturodl/deneb/blob/master/Maven/Spring/ParkingApp/img/Parking-app-arcts-04.jpg)
