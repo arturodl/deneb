@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
+<!--   <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -33,9 +33,81 @@
   </div>
 </div>
 
-<div class="container">    
+-->
+
+<script type="text/javascript">
+
+	function getView(urlView) {
+		$.ajax({
+			type : "GET",
+			//contentType : "application/json",
+			url : urlView,
+			success : function(resultado, status, xhr) {
+				$('#divGestionVehiculos').replaceWith(resultado);
+				//$('html, body').animate({ scrollTop: $("#divMensajesVehiculos").offset().top }, 500);
+			},
+			error : function(xhr, status, error) {
+				console.log("ERROR: ", xhr);
+				alert('Error, status is: '+status);					
+			},
+			complete: function(xhresponse,status){
+				//alert('Request Complete: '+status);
+			}
+		});		
+	}	
+
+	function postVehicles(urlAction, serializedData) {
+		$.ajax({
+			type : "POST",
+			//contentType : "application/json",
+			url : urlAction,
+			data : serializedData,
+			success : function(resultado, status, xhr) {
+				$('#divGestionVehiculos').replaceWith(resultado);
+				$('html, body').animate({ scrollTop: $("#divMensajesVehiculos").offset().top }, 500);
+			},
+			error : function(xhr, status, error) {
+				console.log("ERROR: ", xhr);
+				alert('Error, status is: '+status);					
+			},
+			complete: function(xhresponse,status){
+				//alert('Request Complete: '+status);
+			}
+		});		
+	}
+
+	$(document).ready(function() { 		
+		 $('#formPrincipalVehiculo').submit(function() {
+			  // alert('Entrando a Vehiculo');
+	  		  postVehicles(
+	  			$(this).attr("action"),
+	  			$(this).serialize()	
+	  		  );
+	  		  return false;		   
+		});
+	});
+</script> 
+
+<script type="text/javascript"> /*
+		$(document).ready(function() {
+			$("#formPrincipalVehiculo").submit(function() {  
+				alert('Entrando');
+				$.post($(this).attr("action"), $(this).serialize(), function(html) {
+					$("#divGestionVehiculos").replaceWith(html);
+					$('html, body').animate({ scrollTop: $("#message").offset().top }, 500);
+				});
+				return false;  
+			});			
+		}); */
+</script>
+
+<div id="divGestionVehiculos" class="container">    
   <c:url var="gestionarVehiculo" value="/vehiculo/ejecutar" ></c:url>
-  <form:form action="${gestionarVehiculo}" modelAttribute="vehiculo" method="POST">
+  <div id="divMensajesVehiculos">
+  	<h6 style="color:blue;"> ${success}</h6>
+	<h6 style="color:red;"> ${error}</h6>
+  </div>  
+  <form:form id="formPrincipalVehiculo" action="${gestionarVehiculo}" modelAttribute="vehiculo" method="POST">
 	<table>
 		<c:if test="${vehiculo.idVehiculo > 0}">
 		    <tr>
@@ -109,20 +181,21 @@
 			<td>
 			</td>
 			<td>
-				<c:if test="${vehiculo.idVehiculo == 0}">
-					<input type="submit" value="<spring:message text="Agregar Vehiculo"/>" class="btn btn-primary"/>
-				</c:if>
-				<c:if test="${vehiculo.idVehiculo > 0}">
-					<input type="submit" value="<spring:message text="Modificar Vehiculo"/>" class="btn btn-primary"/>
-				</c:if>		
-				<!--  <a class="btn btn-primary" href="todoregistros" role="button">Ver Listado</a>  -->		
-			</td>			
-			<td>
-				<a class="btn btn-primary" href="<c:url value='/index' />" role="button">Regresar</a>
-			</td>
+				<p><button type="submit" class="btn btn-primary">
+					<c:if test="${vehiculo.idVehiculo == 0}">
+						Agregar
+					</c:if>
+					<c:if test="${vehiculo.idVehiculo > 0}">
+						Modificar
+					</c:if>					
+				   </button>	
+				   <a class="btn btn-primary" href="#" role="button" onclick="getView('<c:url value='/vehiculo/listado' />');">Regresar</a>			   
+				</p>				
+			</td>				
 		</tr>		
 	</table>	
   </form:form>
+  
 	
   <hr>
   <footer>
@@ -130,5 +203,8 @@
   </footer>
 </div>
 
+<!-- 
 </body>
 </html>
+
+ -->

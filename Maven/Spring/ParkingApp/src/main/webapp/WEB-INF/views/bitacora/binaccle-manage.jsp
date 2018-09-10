@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
+<!--  <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -31,12 +31,68 @@
 	</p>   
   </div>
 </div>
+ -->
+ 
+<script type="text/javascript">
+	function getView(urlView) {
+		$.ajax({
+			type : "GET",
+			//contentType : "application/json",
+			url : urlView,
+			success : function(resultado, status, xhr) {
+				$('#divBinaccleManage').replaceWith(resultado);
+				//$('html, body').animate({ scrollTop: $("#divMensajesVehiculos").offset().top }, 500);
+			},
+			error : function(xhr, status, error) {
+				console.log("ERROR: ", xhr);
+				alert('Error, status is: '+status);					
+			},
+			complete: function(xhresponse,status){
+				//alert('Request Complete: '+status);
+			}
+		});		
+	}	
+	
+	function ajaxPostBinnacleData(urlAction, serializedData) {
+		$.ajax({
+			type : "POST",
+			//contentType : "application/json",
+			url : urlAction,
+			data : serializedData,
+			success : function(resultado, status, xhr) {
+				$('#divBinaccleManage').replaceWith(resultado);
+				//$('html, body').animate({ scrollTop: $("#divMensajesVehiculos").offset().top }, 500);
+			},
+			error : function(xhr, status, error) {
+				console.log("ERROR: ", xhr);
+				alert('Error, status is: '+status);					
+			},
+			complete: function(xhresponse,status){
+				//alert('Request Complete: '+status);
+			}
+		});		
+	}
 
-<div class="container">
-    
+	$(document).ready(function() { 		
+		 $('#formPrincipalBitacora').submit(function() {
+			  // alert('Entrando a Vehiculo');
+	  		  ajaxPostBinnacleData(
+	  			$(this).attr("action"),
+	  			$(this).serialize()	
+	  		  );
+	  		  return false;		   
+		});
+	});
+</script>
+ 
+<div id="divBinaccleManage" class="container">
+    <div id="divMensajesVehiculos">
+	  	<h6 style="color:blue;"> ${success}</h6>
+		<h6 style="color:red;"> ${error}</h6>
+    </div>  
 	<c:if test="${mostrarFormulario}">
-	  <c:url var="agregarRegistro" value="/bitacora/ejecutar" ></c:url>
-	  <form:form action="${agregarRegistro}" modelAttribute="registro" method="POST">
+	  <c:url var="ejecutar" value="/bitacora/ejecutar" ></c:url>
+	  <form:form id="formPrincipalBitacora" action="${ejecutar}" modelAttribute="registro" method="POST">
 		<table>
 			<c:if test="${registro.idRegistro > 0}">
 			    <tr>
@@ -106,50 +162,28 @@
 				<td>
 				</td>
 				<td>
-					<c:if test="${registro.idRegistro == 0}">
-						<input type="submit" value="<spring:message text="Asignar Entrada"/>" class="btn btn-primary"/>
-					</c:if>
-					<c:if test="${registro.idRegistro > 0}">
-						<input type="submit" value="<spring:message text="Asignar Salida"/>" class="btn btn-primary"/>
-					</c:if>		
-					<!--  <a class="btn btn-primary" href="todoregistros" role="button">Ver Listado</a>  -->		
-				</td>			
-				<td>
-					<a class="btn btn-primary" href="<c:url value='/index' />" role="button">Regresar</a>
-				</td>
+					<p><button type="submit" class="btn btn-primary">
+							<c:if test="${registro.idRegistro == 0}">
+								Registrar Entrada
+							</c:if>
+							<c:if test="${registro.idRegistro > 0}">
+								Registrar Salida
+							</c:if>		
+						</button>
+						<a class="btn btn-primary" href="#" role="button" onclick="getView('<c:url value='/bitacora/resumen' />');">Regresar</a>
+					</p>							
+				</td>						
 			</tr>		
 		</table>	
 	  </form:form>
 	</c:if>
 
-  <c:if test="${mostrarResumenBitacora}">
-	<h5>Lista de Registros</h5>
-	<table class="tg">
-		<tr>
-			<th width="80">Id Registro</th>
-			<th width="120">Fecha Entrada</th>
-			<th width="120">Fecha Salida</th>
-			<th width="60">Hora Entrada</th>
-			<th width="60">Hora Salida</th>
-			<th width="60">Vehiculo</th>
-		</tr>
-		<c:forEach items="${listaRegistros}" var="registro">
-			<tr>
-				<td>${registro.idRegistro}</td>
-				<td>${registro.fechaEntrada}</td>
-				<td>${registro.fechaSalida}</td>
-				<td>${registro.horaEntrada}</td>
-				<td>${registro.horaSalida}</td>					
-				<td>${registro.vehiculo.noPlaca}</td>
-			</tr>
-		</c:forEach>
-	</table>
-  </c:if>
   <hr>
   <footer>
 	<p>Arct-Applications</p>
   </footer>
 </div>
 
+<!-- 
 </body>
-</html>
+</html>    -->

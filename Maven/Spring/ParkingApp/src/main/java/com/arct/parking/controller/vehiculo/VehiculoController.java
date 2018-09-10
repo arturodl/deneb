@@ -11,18 +11,22 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.arct.parking.dto.InsertarVehiculoPeticion;
 import com.arct.parking.dto.ModificarVehiculoPeticion;
+import com.arct.parking.dto.ObtenerRegistroPeticion;
+import com.arct.parking.dto.ObtenerRegistroRespuesta;
 import com.arct.parking.dto.ObtenerVehiculoPeticion;
 import com.arct.parking.dto.ObtenerVehiculoRespuesta;
+import com.arct.parking.model.Registro;
 import com.arct.parking.model.Vehiculo;
 import com.arct.parking.service.vehiculo.VehiculoService;
 
 @Controller
-@RequestMapping(value="/vehiculo", method=RequestMethod.POST)
+@RequestMapping(value="/vehiculo")
 public class VehiculoController {
 	
 	@Autowired
@@ -35,10 +39,23 @@ public class VehiculoController {
 	  binder.registerCustomEditor(Date.class, orderDateEditor);
 	}
 	
-	@RequestMapping(value="/gestionar", method=RequestMethod.GET)
+	@RequestMapping(value="/agregar", method=RequestMethod.GET)
 	public String iniciar(ModelMap model, @ModelAttribute Vehiculo vehiculo) {
 		model.addAttribute("bienvenida","Bienvenido a la Pantalla de Registro de Vehiculos");
-		return "vehiculo/gestion";
+		return "vehiculo/vehicle-manage";
+	}
+	
+	@RequestMapping(value="/editar/{idVehiculo}", method=RequestMethod.GET)
+	public String editarRegistro(@PathVariable("idVehiculo") int idVehiculo, ModelMap model ) {
+		System.out.println("Id Vehiculo Recuperado: "+idVehiculo);
+		Vehiculo vehiculoABuscar = new Vehiculo();
+		vehiculoABuscar.setIdVehiculo(idVehiculo);
+		
+		model.addAttribute("vehiculo", obtenerVehiculo(vehiculoABuscar));
+		model.addAttribute("mostrarFormulario",true);
+		model.addAttribute("mostrarResumenBitacora", false);
+		
+		return "vehiculo/vehicle-manage";
 	}
 	
 	@RequestMapping(value="/ejecutar", method=RequestMethod.POST)
@@ -73,8 +90,8 @@ public class VehiculoController {
 		
 		model.addAttribute("mostrarFormulario",true);
 								
-		return "vehiculo/gestion";
-	}	
+		return "vehiculo/vehicle-manage";
+	}		
 	
 	@RequestMapping(value="/listado", method =RequestMethod.GET)
 	public String mostrarVehiculos(ModelMap model) {
@@ -92,7 +109,33 @@ public class VehiculoController {
 			e.printStackTrace();
 		}
 		
-		return "vehiculo/listado";
+		return "vehiculo/vehicle-resume";
+	}
+	
+	public Vehiculo obtenerVehiculo(Vehiculo vehiculo) {
+		ObtenerVehiculoPeticion peticionVehiculo = new ObtenerVehiculoPeticion();
+		ObtenerVehiculoRespuesta respuestaVehiculo = null;
+		
+		peticionVehiculo.setVehiculo(vehiculo);
+		
+		respuestaVehiculo = obtenerVehiculo(peticionVehiculo);
+		
+		if(!respuestaVehiculo.getListaVehiculos().isEmpty())
+			return (Vehiculo)respuestaVehiculo.getListaVehiculos().get(0);
+		else
+			return null; 			
+	}
+	
+	public ObtenerVehiculoRespuesta obtenerVehiculo(ObtenerVehiculoPeticion peticion) {
+		ObtenerVehiculoRespuesta respuesta = null;
+		
+		try {
+			respuesta = vehiculoService.obtenerVehiculo(peticion);
+		}catch(Exception e) {
+			System.out.println("Hubo un error al invocar VehiculoService.obtenerVehiculo: "+e.getCause());
+		}
+	
+		return respuesta;
 	}
 
 	public VehiculoService getVehiculoService() {

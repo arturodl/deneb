@@ -29,7 +29,7 @@ public class IndexController {
 	@RequestMapping(method =RequestMethod.GET)
 	public String darBienvenida(ModelMap model) {
 		model.addAttribute("bienvenida","Bienvenidos al Sistema de Gestion de Entradas y Salidas");
-		return "bienvenidos";
+		return "welcome";
 	}
 	
 	@RequestMapping(value="/regsalida", method =RequestMethod.GET)

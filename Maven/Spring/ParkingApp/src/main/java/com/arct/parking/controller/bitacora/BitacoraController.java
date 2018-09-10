@@ -43,14 +43,29 @@ public class BitacoraController {
 	  binder.registerCustomEditor(Date.class, orderDateEditor);  
 	}
 	
-	@RequestMapping(value="/gestionar", method =RequestMethod.GET)
+	@RequestMapping(value="/agregar", method =RequestMethod.GET)
 	public String gestionarBitacora(ModelMap model, @ModelAttribute Registro registro) {
 		model.addAttribute("bienvenida","Bienvenido a la Pantalla de Registro de Entradas");
 		model.addAttribute("mostrarFormulario", true);
 		model.addAttribute("mostrarResumenBitacora", false);
-		return "bitacora/registro";
+		return "bitacora/binaccle-manage";
 	}
 	
+	@RequestMapping(value="/editar/{idRegistro}", method=RequestMethod.GET)
+	public String mostrarRegistro(@PathVariable("idRegistro") int idRegistro, ModelMap model, @ModelAttribute Registro registro ) {
+		System.out.println("Id Recuperado: "+idRegistro);
+		System.out.println("Id Recuperado del Registro ModelAttribute: "+registro.getIdRegistro());
+		System.out.println("Hora de Entrada del Registro ModelAttribute: "+registro.getHoraEntrada());
+		Registro registroABuscar = new Registro();
+		registroABuscar.setIdRegistro(idRegistro);
+		
+		model.addAttribute("registro", obtenerRegistro(registroABuscar));
+		model.addAttribute("mostrarFormulario",true);
+		model.addAttribute("mostrarResumenBitacora", false);
+		
+		return "bitacora/binaccle-manage";
+	}
+		
 	@RequestMapping(value="/ejecutar", method=RequestMethod.POST)
 	public String ejecutarAccion(ModelMap model, @ModelAttribute Registro registro) {
 		System.out.println("Gestionar Registro");
@@ -100,22 +115,9 @@ public class BitacoraController {
 		
 		model.addAttribute("mostrarFormulario",true);
 		model.addAttribute("mostrarResumenBitacora", false);
-						
-		return "bitacora/registro";
-	}
-	
-	@RequestMapping(value="/mostrarRegistro/{idRegistro}", method=RequestMethod.GET)
-	public String mostrarRegistro(@PathVariable("idRegistro") int idRegistro, ModelMap model, @ModelAttribute Registro registro  ) {
-		System.out.println("Id Recuperado: "+idRegistro);
-		Registro registroABuscar = new Registro();
-		registroABuscar.setIdRegistro(idRegistro);
 		
-		model.addAttribute("registro", obtenerRegistro(registro));
-		model.addAttribute("bienvenida","Bienvenido a la Pantalla de Registro de Salidas");		
-		model.addAttribute("mostrarFormulario",true);
-		model.addAttribute("mostrarResumenBitacora", false);
-		
-		return "bitacora/registro";
+		//return null;
+		return "bitacora/binaccle-manage";
 	}
 	
 	@RequestMapping(value="/resumen", method=RequestMethod.GET)
@@ -133,7 +135,7 @@ public class BitacoraController {
 			e.printStackTrace();
 		}
 		
-		return "bitacora/resumen";
+		return "bitacora/binaccle-resume";
 	}
 	
 	public Registro obtenerRegistro(Registro registro) {
