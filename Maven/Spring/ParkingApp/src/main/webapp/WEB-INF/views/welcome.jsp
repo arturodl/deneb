@@ -8,8 +8,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta charset="utf-8" />
        
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="<c:url value="/resources/js/bootstrap.min.js" />" > </script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<!--  <script src="<c:url value="/resources/js/bootstrap.min.js" />" > </script>  -->
+	<link href="<c:url value="/resources/css/jquery-ui.css" />" rel="stylesheet"/>
 	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>	
 	<link href="<c:url value="/resources/css/stylesforviews/dashboard.css" />" rel="stylesheet"/>
 	
@@ -76,7 +78,7 @@
 			});		
 		}
 		
-		$(function() {
+		$(document).ready(function(){
 		   /*  Submit form using Ajax */
 		   $('a#linkChecking').click(function(e) {
 			   getViewBinnacleList();			   
@@ -84,7 +86,7 @@
 		   $('a#linkVehicles').click(function(e) {
 			   getListVehiclesView();		   
 		   });	
-		  
+		  		 
 		});
 	
 	</script>
@@ -225,7 +227,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                 This week
               </button>
-            </div>
+            </div>            
           </div>
 
           <div id="divMainContent">
@@ -376,41 +378,10 @@
 	           </div>
 	         </div>
         </main>
-
-<!-- 
-<div class="container">
-  <div class="row">
-	<div class="col-md-4">
-		<p>Bitacora</p>
-		<ul>
-			<li> <a class="btn btn-default" href="<c:url value="/bitacora/gestionar" />" role="button">Registrar Entrada</a> </li>
-			<li> <a class="btn btn-default" href="<c:url value="/bitacora/resumen" />" role="button">Registrar Salida</a> </li>
-			<li> <a class="btn btn-default" href="<c:url value="/bitacora/resumen" />" role="button">Ver Resumen</a> </li>	
-		</ul>
-	</div>
-	<div class="col-md-4">
-		<p>Vehiculos</p>
-		<ul>
-			<li> <a class="btn btn-default" href="<c:url value="/vehiculo/gestionar" />" role="button">Agregar Vehiculo</a> </li>
-			<li> <a class="btn btn-default" href="<c:url value="/vehiculo/listado" />" role="button">Modificar Vehiculo</a> </li>
-			<li> <a class="btn btn-default" href="<c:url value="/vehiculo/listado" />" role="button">Ver Lista de Vehiculos</a> </li>
-		</ul>
-	</div>
-	<div class="col-md-4">
-		<p>Usuario</p>
-		<ul>
-			<li><a class="btn btn-default" href="#" role="button">Agregar Usuario</a></li>
-			<li><a class="btn btn-default" href="#" role="button">Modificar Usuario</a> </li>
-			<li><a class="btn btn-default" href="#" role="button">Eliminar Usuario</a> </li>
-		</ul>
-	</div>
-  </div>
- -->
   <hr>
   <footer>
 	<p>Arct-Applications</p>
   </footer>
-</div>
 
 </body>
 </html>

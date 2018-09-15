@@ -3,17 +3,23 @@ package com.arct.parking.controller.bitacora;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.arct.parking.dto.InsertarRegistroPeticion;
 import com.arct.parking.dto.ModificarRegistroPeticion;
@@ -43,33 +49,40 @@ public class BitacoraController {
 	  binder.registerCustomEditor(Date.class, orderDateEditor);  
 	}
 	
+	@ModelAttribute
+    public void addAttributes(ModelMap model) {
+        model.addAttribute("msg", "Welcome to the Netherlands!");
+    }
+	
 	@RequestMapping(value="/agregar", method =RequestMethod.GET)
 	public String gestionarBitacora(ModelMap model, @ModelAttribute Registro registro) {
-		model.addAttribute("bienvenida","Bienvenido a la Pantalla de Registro de Entradas");
 		model.addAttribute("mostrarFormulario", true);
-		model.addAttribute("mostrarResumenBitacora", false);
+		model.addAttribute("disableBtnExecute", false);
+		model.addAttribute("captureCheckIn", true);
+		model.addAttribute("captureCheckOut", false);
 		return "bitacora/binaccle-manage";
 	}
 	
 	@RequestMapping(value="/editar/{idRegistro}", method=RequestMethod.GET)
 	public String mostrarRegistro(@PathVariable("idRegistro") int idRegistro, ModelMap model, @ModelAttribute Registro registro ) {
 		System.out.println("Id Recuperado: "+idRegistro);
-		System.out.println("Id Recuperado del Registro ModelAttribute: "+registro.getIdRegistro());
-		System.out.println("Hora de Entrada del Registro ModelAttribute: "+registro.getHoraEntrada());
 		Registro registroABuscar = new Registro();
 		registroABuscar.setIdRegistro(idRegistro);
 		
 		model.addAttribute("registro", obtenerRegistro(registroABuscar));
 		model.addAttribute("mostrarFormulario",true);
-		model.addAttribute("mostrarResumenBitacora", false);
-		
+		model.addAttribute("disableBtnExecute", false);
+		model.addAttribute("captureCheckIn", false);
+		model.addAttribute("captureCheckOut", true);
+		model.addAttribute("class-disabled", "background-disabled");		
+				
 		return "bitacora/binaccle-manage";
 	}
 		
 	@RequestMapping(value="/ejecutar", method=RequestMethod.POST)
 	public String ejecutarAccion(ModelMap model, @ModelAttribute Registro registro) {
-		System.out.println("Gestionar Registro");
-				
+		System.out.println("Executing Actions for Record, model its size?: "+model.size());		
+						
 		InsertarRegistroPeticion peticionInsertar = new InsertarRegistroPeticion();
 		ModificarRegistroPeticion peticionModificar = new ModificarRegistroPeticion();
 		Vehiculo vehiculo = null;
@@ -85,14 +98,17 @@ public class BitacoraController {
 					registro.setVehiculo(vehiculo);
 					peticionInsertar.setRegistro(registro);
 					bitacoraService.insertarRegistro(peticionInsertar);
-					model.addAttribute("bienvenida","Bienvenido a la Pantalla de Registro de Salidas");
+					model.addAttribute("disableBtnExecute", true);
+					model.addAttribute("captureCheckIn", true);
+					model.addAttribute("captureCheckOut", false);
 					model.addAttribute("success","La entrada fue registrada con exito, puede proporcionar la hora y fecha de salida o puede hacer click en regresar para ir a la pantalla principal");
-				}else {
-					model.addAttribute("bienvenida","Bienvenido a la Pantalla de Registro de Entradas");
+				}else {				
+					model.addAttribute("captureCheckIn", true);
+					model.addAttribute("captureCheckOut", false);
 					model.addAttribute("error","No se puede insertar el registro ya que el numero de placa no existe.");
 				}
 				
-			}else {
+			}else if(registro.getIdRegistro() > 0){
 				Vehiculo vehiculoModificar = new Vehiculo();
 				vehiculoModificar.setIdVehiculo(registro.getVehiculo().getIdVehiculo());
 				
@@ -103,20 +119,22 @@ public class BitacoraController {
 				
 				bitacoraService.modificarRegistro(peticionModificar);
 				
-				model.addAttribute("bienvenida","Bienvenido a la Pantalla de Registro de Salidas");
+				model.addAttribute("disableBtnExecute", true);
+				model.addAttribute("captureCheckIn", false);
+				model.addAttribute("captureCheckOut", true);
+				model.addAttribute("class-disabled", "background-disabled");
 				model.addAttribute("success","La salida fue registrada con exito, haga click en regresar para regresar a la pantalla principal.");
+			}else{
+				throw new Exception("No se ha definido que acciones tomar con el registro");
 			}
 			
 		}catch(Exception e) {
-			System.out.println("Hubo un error al invocar BitacoraService.insertarRegistro, favor de checar el log: "+e.getCause());
+			System.out.println("Hubo un error al invocar BitacoraService.insertarRegistro, favor de checar el log: "+e.getMessage());
 			model.addAttribute("error","Hubo un error al invocar BitacoraService.insertarRegistro: "+e.getCause());
 			e.printStackTrace();
 		}
 		
 		model.addAttribute("mostrarFormulario",true);
-		model.addAttribute("mostrarResumenBitacora", false);
-		
-		//return null;
 		return "bitacora/binaccle-manage";
 	}
 	
@@ -177,7 +195,12 @@ public class BitacoraController {
 			return null; 			
 	}
 	
-	public ObtenerVehiculoRespuesta obtenerVehiculo(ObtenerVehiculoPeticion peticion) {
+	@RequestMapping(value="/getVehiclesByCriteria", method=RequestMethod.POST,
+					consumes=MediaType.APPLICATION_JSON_VALUE,
+					produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ObtenerVehiculoRespuesta obtenerVehiculo(@RequestBody ObtenerVehiculoPeticion peticion) {
+		System.out.println("Invocando al servicio ObtenerVehiculo");
 		ObtenerVehiculoRespuesta respuesta = null;
 		
 		try {

@@ -32,11 +32,13 @@ public class IndexController {
 		return "welcome";
 	}
 	
+	// This mapping is just for getting an example
 	@RequestMapping(value="/regsalida", method =RequestMethod.GET)
 	public String registrarSalida() {
 		return "redirect:/bitacora/resumen";
 	}
 	
+	// This mapping is just for getting an example
 	@RequestMapping(value="/resumen", method =RequestMethod.GET)
 	public String mostrarResumen() {
 		return "redirect:/bitacora/resumen";

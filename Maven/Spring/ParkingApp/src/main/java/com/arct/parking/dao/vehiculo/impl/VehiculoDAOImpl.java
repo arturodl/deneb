@@ -86,7 +86,7 @@ public class VehiculoDAOImpl implements VehiculoDAO {
 		String query = null;
 		try {
 			respuesta = new ObtenerVehiculoRespuesta();
-			query = construirQuery(peticion.getVehiculo());
+			query = construirQuery(peticion.getVehiculo(), peticion.getEnableLike());
 			
 			Session session = this.sessionFactory.getCurrentSession();			
 			List<Vehiculo> listaVehiculos = session.createQuery(query).list();
@@ -103,13 +103,16 @@ public class VehiculoDAOImpl implements VehiculoDAO {
 		return respuesta;		
 	}
 	
-	public String construirQuery(Vehiculo vehiculo) {
+	public String construirQuery(Vehiculo vehiculo, boolean enableLike) {
 		StringBuilder query = new StringBuilder("from Vehiculo v where 1=1");
 		
 		if(vehiculo.getIdVehiculo() > 0)
 			query.append(" and v.idVehiculo = ").append( vehiculo.getIdVehiculo() );
-		if(vehiculo.getNoPlaca() != null )
-			query.append(" and v.noPlaca = '").append(vehiculo.getNoPlaca()).append("' ");
+		if(vehiculo.getNoPlaca() != null)
+			if(!enableLike)
+				query.append(" and v.noPlaca = '").append(vehiculo.getNoPlaca()).append("' ");
+			else
+				query.append(" and v.noPlaca like '%").append(vehiculo.getNoPlaca()).append("%' ");
 		if(vehiculo.getMarca() != null )
 			query.append(" and v.marca = '").append(vehiculo.getMarca()).append("' ");
 		if(vehiculo.getModelo() != null)

@@ -1,5 +1,6 @@
 package com.arct.parking.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Basic;
@@ -14,8 +15,13 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="Vehiculo")
-public class Vehiculo {
+public class Vehiculo implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="idVehiculo")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
