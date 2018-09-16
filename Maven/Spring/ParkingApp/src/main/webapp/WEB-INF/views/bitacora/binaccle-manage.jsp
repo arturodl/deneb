@@ -4,45 +4,14 @@
 
 <%! String classDisabled = null; %>
 
-<!--  <!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<title>Parking Application by Arct-Applications</title>
-	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
-    <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-</head>
-
-<nav class="navbar navbar-inverse navbar-fixed-top" style="background: #212529">
-  <div class="container">
-	<div class="navbar-header">
-		<p style="color:white; font-size: 15px;">Parking Application</p>
-	</div>
-  </div>
-</nav>
-
-<div class="jumbotron">
-  <div class="container">
-    <h5>Registro de Entradas y Salidas de Vehiculos</h5>
-	<p>
-		<h6> ${bienvenida} </h6> 
-		<h5 style="color:blue;"> ${success}</h5>
-		<h5 style="color:red;"> ${error}</h5>
-		
-	</p>   
-  </div>
-</div>
- -->
- 
 <style>
-.default-font-size{
-	font-size: 14px;
-}
-
-.background-disabled{
-	background: #dddddd;
-}
+	.default-font-size{
+		font-size: 14px;
+	}
+	
+	.background-disabled{
+		background: #dddddd;
+	}
 </style>
 
 <div id="divBinaccleManage" class="container">
@@ -55,13 +24,13 @@
 	  <c:url var="ejecutar" value="/bitacora/ejecutar" ></c:url>
 	  <form:form id="formPrincipalBitacora" action="${ejecutar}" modelAttribute="registro" method="POST">
 		<table>		
-			<c:if test="${captureCheckIn}">
+			<c:if test="${capturePlateNumber}">
 			   	<tr>
 					<td>
 						<label>Buscar No. Placa</label>
 					</td>
 					<td>
-					   	<input id="txtBuscarNoPlaca" class="form-control default-font-size" placeholder="Tecla el numero de placa" />				   
+					   	<input id="txtBuscarNoPlaca" class="form-control default-font-size" placeholder="Teclea el numero de placa" />				   
 					</td> 
 				</tr>
 			</c:if>
@@ -105,7 +74,7 @@
 							/>
 				</td> 
 			</tr>
-			<c:if test="${captureCheckIn}">
+			<c:if test="${showCheckInDatesEnabled}">
 				<tr>
 					<td>
 						<form:label path="fechaEntrada">
@@ -127,7 +96,7 @@
 					</td>
 				</tr>
 			</c:if>
-			<c:if test="${captureCheckOut}">
+			<c:if test="${showCheckInDatesDisabled}">
 				<tr>
 					<td>
 						<form:label path="fechaEntrada">
@@ -148,6 +117,8 @@
 						<form:input path="horaEntrada" cssClass="form-control default-font-size background-disabled" readonly="true" />
 					</td>
 				</tr>
+			</c:if>
+			<c:if test="${captureCheckOut}">
 				<tr>
 					<td>
 						<form:label path="fechaSalida">
@@ -184,6 +155,9 @@
 							<c:if test="${captureCheckOut}">
 								Registrar Salida
 							</c:if>		
+							<c:if test="${showNoAccess}">
+								Sin Acceso
+							</c:if>
 						</button>
 						<a class="btn btn-primary default-font-size" href="#" role="button" onclick="getView('<c:url value='/bitacora/resumen' />');">Regresar</a>
 					</p>							
@@ -193,129 +167,11 @@
 	  </form:form>
 	</c:if>
 
-  <hr>
+  <hr/>
   <footer>
 	<p>Arct-Applications</p>
   </footer>
 </div>
 
-<script>
-	function getView(urlView) {
-		$.ajax({
-			type : "GET",
-			//contentType : "application/json",
-			url : urlView,
-			success : function(resultado, status, xhr) {
-				$('#divBinaccleManage').replaceWith(resultado);
-				//$('html, body').animate({ scrollTop: $("#divMensajesVehiculos").offset().top }, 500);
-			},
-			error : function(xhr, status, error) {
-				console.log("ERROR: ", xhr);
-				alert('Error, status is: '+status);					
-			},
-			complete: function(xhresponse,status){
-				//alert('Request Complete: '+status);
-			}
-		});		
-	}	
+<script type="text/javascript" src="<c:url value="/resources/js/bitacora/binaccle-manage.js" />"></script>
 	
-	function ajaxPostBinnacleData(urlAction, serializedData) {
-		$.ajax({
-			type : "POST",
-			//contentType : "application/json",
-			url : urlAction,
-			data : serializedData,
-			success : function(resultado, status, xhr) {
-				$('#divBinaccleManage').replaceWith(resultado);
-				//$('html, body').animate({ scrollTop: $("#divMensajesVehiculos").offset().top }, 500);
-			},
-			error : function(xhr, status, error) {
-				console.log("ERROR: ", xhr);
-				alert('Error, status is: '+status);					
-			},
-			complete: function(xhresponse,status){
-				//alert('Request Complete: '+status);
-			}
-		});		
-	}
-	
-	$(document).ready(function() { 		
-		 $('#formPrincipalBitacora').submit(function() {
-			  // alert('Entrando a Vehiculo');
-	  		  ajaxPostBinnacleData(
-	  			$(this).attr("action"),
-	  			$(this).serialize()	
-	  		  );
-	  		  return false;		   
-		 });
-		 
-		 $('#txtBuscarNoPlaca').autocomplete({
-		      source: function( request, response ) {
-		        $.ajax({
-		          type: "POST",
-		          contentType: "application/json",
-		          url: "bitacora/getVehiclesByCriteria",		          
-		          dataType: "json",
-		          data: JSON.stringify({
-		        	  vehiculo: {
-		        			noPlaca: request.term,
-		        			"@type": "Vehiculo"
-		        		},
-		        	  enableLike: true		           
-		          }),
-		          success: function( responseBody ) {
-		        	  try{
-		        		  console.log( responseBody.listaVehiculos );
-		        		 response(
-		        		       $.map(responseBody.listaVehiculos, function (vehiculo) {                                
-	                            var item = new Object();
-
-	                            //autocomplete default values REQUIRED
-	                            item.label = vehiculo.noPlaca;
-	                            //item.value = vehiculo.noPlaca;
-                               
-	                            //extend values
-	                            item.noPlaca = vehiculo.noPlaca;
-	                            item.marca = vehiculo.marca;
-	                            item.modelo = vehiculo.modelo;
-	                            item.tipoVehiculo = vehiculo.tipoVehiculo;                           
-
-	                            return item;
-		        		       }));        		
-		        	  }catch (e) {
-						alert('Error al leer los datos obtenidos');
-						console.log(e);
-					}
-		          }
-		        });
-		      },
-		      minLength: 3,
-		      select: function( event, ui ) {
-		       /* alert( ui.item ?
-		          "Selected: " + ui.item.label :
-		          "Nothing selected, input was " + this.value); */ 
-		         $('#txtNoPlaca').val(ui.item.noPlaca);
-		         $('#txtMarcaVehiculo').val(ui.item.marca);
-		         $('#txtModeloVehiculo').val(ui.item.modelo);
-		         if( String(ui.item.tipoVehiculo).valueOf() == String('O').valueOf() )
-		         	$('#txtTipoVehiculo').val('Oficial');
-		         else if( String(ui.item.tipoVehiculo).valueOf() == String('N').valueOf() )
-		        	 $('#txtTipoVehiculo').val('Normal');
-		         else
-		        	 $('#txtTipoVehiculo').val(ui.item.marca);
-		      },
-		      open: function() {
-		        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-		      },
-		      close: function() {
-		        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-		      }
-		    });
-	});
-</script>
-	
-
-
-<!-- 
-</body>
-</html>    -->

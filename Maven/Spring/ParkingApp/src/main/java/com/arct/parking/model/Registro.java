@@ -43,6 +43,10 @@ public class Registro extends Entidad{
 	@Basic(optional=true)
 	private String horaSalida;
 	
+	@Column(name="status")
+	@Basic(optional=false)
+	private String status;
+	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="idVehiculo", referencedColumnName="idVehiculo")
 	private Vehiculo vehiculo;	
@@ -83,7 +87,12 @@ public class Registro extends Entidad{
 	}
 	public void setVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
+	}	
+	public String getStatus() {
+		return status;
 	}
-	
+	public void setStatus(String status) {
+		this.status = status;
+	}	
 	
 }
