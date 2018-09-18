@@ -11,7 +11,9 @@
 	  	<thead>
 		<tr>
 			<th width="60">Folio</th>
-			<th width="60">Vehiculo</th>
+			<th width="60">Placa</th>
+			<th width="60">Marca</th>
+			<th width="60">Modelo</th>
 			<th width="60">Fecha Entrada</th>
 			<th width="60">Hora Entrada</th>
 			<th width="60">Fecha Salida</th>			
@@ -25,6 +27,8 @@
 			<tr>
 				<td><b>${registro.idRegistro}</b></td>
 				<td>${registro.vehiculo.noPlaca}</td>
+				<td>${registro.vehiculo.marca}</td>
+				<td>${registro.vehiculo.modelo}</td>
 				<td>${registro.fechaEntrada}</td>
 				<td>${registro.horaEntrada}</td>
 				<td>${registro.fechaSalida}</td>				
