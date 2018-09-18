@@ -6,7 +6,7 @@
 
 <div id="divResumenBitacora" class="container">
   <a class="btn btn-primary" style="font-size: 14px;" href="#" role="button" onclick="getView('<c:url value='/bitacora/agregar' />');" >Check in</a>
-	<div class="table-responsive">
+  <div class="table-responsive">
 	  <table class="table table-striped table-sm">
 	  	<thead>
 		<tr>

@@ -9,11 +9,18 @@
 	<meta charset="utf-8" />
        
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<!--  <script src="<c:url value="/resources/js/bootstrap.min.js" />" > </script>  -->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
+	<script src="<c:url value="/resources/js/plugins/datepicker/bootstrap-datepicker.min.js" />" type="text/javascript"></script>
+	<script src="<c:url value="/resources/js/plugins/datepicker/locale/bootstrap-datepicker.es.min.js" />" type="text/javascript"></script>
+	<script src="<c:url value="/resources/js/plugins/wickedpicker/wickedpicker.min.js" />" type="text/javascript"></script>
+	<script src="<c:url value="/resources/js/bootstrap.min.js" />" > </script>
 	<link href="<c:url value="/resources/css/jquery-ui.css" />" rel="stylesheet"/>
-	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>	
+	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet" id="bs-css"/>	
+	<link href="<c:url value="/resources/css/plugins/datepicker/bootstrap-datepicker3.min.css" />" rel="stylesheet" id="bsdp-css"/>
+	<link href="<c:url value="/resources/css/plugins/wickedpicker/wickedpicker.min.css" />" rel="stylesheet"/>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 	<link href="<c:url value="/resources/css/stylesforviews/dashboard.css" />" rel="stylesheet"/>
+	
 	
 	<script type="text/javascript" >
 		
@@ -85,8 +92,7 @@
 		   });
 		   $('a#linkVehicles').click(function(e) {
 			   getListVehiclesView();		   
-		   });	
-		  		 
+		   });		  
 		});
 	
 	</script>
@@ -177,7 +183,8 @@
                 </a>
               </li>
             </ul>
-
+         
+          <!-- 
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Saved reports</span>
               <a class="d-flex align-items-center text-muted" href="#">
@@ -210,6 +217,7 @@
                 </a>
               </li>
             </ul>
+          -->
           </div>
         </nav>
 	</div>	
@@ -223,10 +231,12 @@
                 <button class="btn btn-sm btn-outline-secondary">Share</button>
                 <button class="btn btn-sm btn-outline-secondary">Export</button>
               </div>
+              <!-- 
               <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                 This week
               </button>
+               -->
             </div>            
           </div>
 

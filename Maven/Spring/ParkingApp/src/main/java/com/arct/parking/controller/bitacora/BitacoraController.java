@@ -59,8 +59,6 @@ public class BitacoraController {
 		model.addAttribute("disableBtnExecute", false);
 		model.addAttribute("capturePlateNumber", true);
 		model.addAttribute("showCheckInDatesEnabled", true);
-		model.addAttribute("showCheckInDatesDisabled", false);
-		model.addAttribute("captureCheckIn", true);
 		model.addAttribute("captureCheckOut", false);
 		return "bitacora/binaccle-manage";
 	}
@@ -68,17 +66,18 @@ public class BitacoraController {
 	@RequestMapping(value="/editar/{idRegistro}", method=RequestMethod.GET)
 	public String mostrarRegistro(@PathVariable("idRegistro") int idRegistro, ModelMap model, @ModelAttribute Registro registro ) {
 		System.out.println("Id Recuperado: "+idRegistro);
+		
 		Registro registroABuscar = new Registro();
 		registroABuscar.setIdRegistro(idRegistro);
-		
-		model.addAttribute("registro", obtenerRegistro(registroABuscar));
+		registroABuscar = obtenerRegistro(registroABuscar);
+		model.addAttribute("registro", registroABuscar);
 		model.addAttribute("disableBtnExecute", false);
 		model.addAttribute("capturePlateNumber", false);
 		model.addAttribute("showCheckInDatesEnabled", false);
-		model.addAttribute("showCheckInDatesDisabled", true);
-		model.addAttribute("captureCheckIn", false);
+		model.addAttribute("showCheckOutDatesEnabled", true);
 		model.addAttribute("captureCheckOut", true);
 				
+		System.out.println("Registro vehiculo: "+registroABuscar.getVehiculo().getIdVehiculo());
 		return "bitacora/binaccle-manage";
 	}
 		
@@ -91,6 +90,8 @@ public class BitacoraController {
 		Vehiculo vehiculo = null;
 		try {	
 			System.out.println("Antes de dar de gestionar el registro el id es: "+registro.getIdRegistro());
+			System.out.println("Antes de dar de gestionar el vehiculo es: "+registro.getVehiculo().getIdVehiculo());
+			System.out.println("Antes de dar de gestionar el vehiculo es: "+registro.getVehiculo().getNoPlaca());
 			
 			if(registro.getIdRegistro() == 0) {
 				vehiculo = new Vehiculo();
@@ -105,25 +106,16 @@ public class BitacoraController {
 					model.addAttribute("disableBtnExecute", true);
 					model.addAttribute("capturePlateNumber", false);
 					model.addAttribute("showCheckInDatesEnabled", false);
-					model.addAttribute("showCheckInDatesDisabled", true);
-					model.addAttribute("success","La entrada fue registrada con exito, puede proporcionar la hora y fecha de salida o puede hacer click en regresar para ir a la pantalla principal");
+					model.addAttribute("success","La entrada fue registrada con exito, haga click en regresar para volver a la pantalla principal");
 				}else {				
 					model.addAttribute("disableBtnExecute", false);
 					model.addAttribute("capturePlateNumber", true);
 					model.addAttribute("showCheckInDatesEnabled", true);
-					model.addAttribute("showCheckInDatesDisabled", false);
 					model.addAttribute("error","No se puede insertar el registro ya que el numero de placa no existe, verifique nuevamente.");
 				}
-				model.addAttribute("captureCheckIn", true);
 				model.addAttribute("captureCheckOut", false);
 				
 			}else if(registro.getIdRegistro() > 0){
-				Vehiculo vehiculoModificar = new Vehiculo();
-				vehiculoModificar.setIdVehiculo(registro.getVehiculo().getIdVehiculo());
-				
-				vehiculoModificar = obtenerVehiculo(vehiculoModificar);
-				
-				registro.setVehiculo(vehiculoModificar);
 				registro.setStatus("O");
 				peticionModificar.setRegistro(registro);
 				
@@ -132,10 +124,9 @@ public class BitacoraController {
 				model.addAttribute("disableBtnExecute", true);
 				model.addAttribute("capturePlateNumber", false);
 				model.addAttribute("showCheckInDatesEnabled", false);
-				model.addAttribute("showCheckInDatesDisabled", true);
-				model.addAttribute("captureCheckIn", false);
+				model.addAttribute("showCheckOutDatesEnabled", false);
 				model.addAttribute("captureCheckOut", true);
-				model.addAttribute("success","La salida fue registrada con exito, haga click en regresar para regresar a la pantalla principal.");
+				model.addAttribute("success","La salida fue registrada con exito, haga click en regresar para volver a la pantalla principal.");
 			}else{
 				throw new Exception("No se han definido las acciones a realizar con el registro");
 			}
@@ -145,7 +136,7 @@ public class BitacoraController {
 			model.addAttribute("disableBtnExecute", true);
 			model.addAttribute("capturePlateNumber", false);
 			model.addAttribute("showCheckInDatesEnabled", false);
-			model.addAttribute("showCheckInDatesDisabled", true);
+			model.addAttribute("showCheckOutDatesEnabled", false);
 			model.addAttribute("showNoAcces", true);
 			model.addAttribute("error","Hubo un error al invocar BitacoraService.insertarRegistro: "+e.getCause());
 			e.printStackTrace();
