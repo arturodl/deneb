@@ -27,8 +27,8 @@
 			<tr>
 				<td><b>${registro.idRegistro}</b></td>
 				<td>${registro.vehiculo.noPlaca}</td>
-				<td>${registro.vehiculo.marca}</td>
-				<td>${registro.vehiculo.modelo}</td>
+				<td>${registro.vehiculo.modelo.marca.marca}</td>
+				<td>${registro.vehiculo.modelo.modelo}</td>
 				<td>${registro.fechaEntrada}</td>
 				<td>${registro.horaEntrada}</td>
 				<td>${registro.fechaSalida}</td>				

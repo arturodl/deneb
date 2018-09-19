@@ -92,7 +92,7 @@ public class VehiculoDAOImpl implements VehiculoDAO {
 			List<Vehiculo> listaVehiculos = session.createQuery(query).list();
 			
 			for(Vehiculo vehiculo : listaVehiculos){
-				System.out.println("Vehiculo: "+vehiculo.getIdVehiculo());
+				System.out.println("Vehiculo: "+vehiculo.getIdVehiculo()+", Modelo: "+vehiculo.getModelo().getModelo()+", Marca: "+vehiculo.getModelo().getMarca().getMarca());
 			}
 			respuesta.setListaVehiculos(listaVehiculos);
 		}catch(Exception e) {
@@ -113,10 +113,10 @@ public class VehiculoDAOImpl implements VehiculoDAO {
 				query.append(" and v.noPlaca = '").append(vehiculo.getNoPlaca()).append("' ");
 			else
 				query.append(" and v.noPlaca like '%").append(vehiculo.getNoPlaca()).append("%' ");
-		if(vehiculo.getMarca() != null )
+		/*if(vehiculo.getMarca() != null )
 			query.append(" and v.marca = '").append(vehiculo.getMarca()).append("' ");
 		if(vehiculo.getModelo() != null)
-			query.append(" and v.modelo = '").append(vehiculo.getModelo()).append("' ");
+			query.append(" and v.modelo = '").append(vehiculo.getModelo()).append("' ");*/
 		if(vehiculo.getTipoVehiculo() != null)
 			query.append(" and v.tipoVehiculo = '").append(vehiculo.getTipoVehiculo()).append("' ");
 		

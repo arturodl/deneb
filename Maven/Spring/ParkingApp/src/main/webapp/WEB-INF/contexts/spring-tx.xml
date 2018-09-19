@@ -31,6 +31,8 @@
 			<list>
 				<value>com.arct.parking.model.Registro</value>
 				<value>com.arct.parking.model.Vehiculo</value>
+				<value>com.arct.parking.model.Marca</value>
+				<value>com.arct.parking.model.Modelo</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

@@ -6,16 +6,19 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="Vehiculo")
-public class Vehiculo implements Serializable{
+public class Vehiculo extends Entidad implements Serializable{
 	
 	/**
 	 * 
@@ -27,15 +30,7 @@ public class Vehiculo implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Basic(optional=false)
 	private int idVehiculo;
-	
-	@Column(name="modelo")
-	@Basic(optional=false)
-	private String modelo;
-	
-	@Column(name="marca")
-	@Basic(optional=false)
-	private String marca;
-	
+		
 	@Column(name="noPlaca")
 	@Basic(optional=false)
 	private String noPlaca;
@@ -49,23 +44,15 @@ public class Vehiculo implements Serializable{
 	@Basic(optional=false)
 	private Date fechaAlta;
 	
+	@JoinColumn(name="idModelo", referencedColumnName="idModelo")
+	@ManyToOne(fetch=FetchType.EAGER)
+	private Modelo modelo;
+	
 	public int getIdVehiculo() {
 		return idVehiculo;
 	}
 	public void setIdVehiculo(int idVehiculo) {
 		this.idVehiculo = idVehiculo;
-	}
-	public String getModelo() {
-		return modelo;
-	}
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
-	public String getMarca() {
-		return marca;
-	}
-	public void setMarca(String marca) {
-		this.marca = marca;
 	}
 	public String getNoPlaca() {
 		return noPlaca;
@@ -84,6 +71,15 @@ public class Vehiculo implements Serializable{
 	}
 	public void setFechaAlta(Date fechaAlta) {
 		this.fechaAlta = fechaAlta;
+	}
+	public Modelo getModelo() {
+		return modelo;
+	}
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 	

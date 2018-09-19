@@ -44,8 +44,8 @@
 				<tr>
 					<td>${vehiculo.idVehiculo}</td>					
 					<td>${vehiculo.noPlaca}</td>
-					<td>${vehiculo.marca}</td>	
-					<td>${vehiculo.modelo}</td>						
+					<td>${vehiculo.modelo.marca.marca}</td>	
+					<td>${vehiculo.modelo.modelo}</td>						
 					<td>					
 						${vehiculo.tipoVehiculo == 'O'? 'Oficial': vehiculo.tipoVehiculo == 'P'? 'Particular': vehiculo.tipoVehiculo == 'R'? 'Residente': vehiculo.tipoVehiculo == 'N'? 'No Residente':'Valor sin registrar'}
 					</td>			

@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
         
-    <!--  We ask spring to look at DAO package to looking for annotated pojos   -->
+    <!--  We ask spring to look at DAO package for looking for annotated pojos   -->
     <context:component-scan base-package="com.arct.parking.dao" />
 	
 	<bean id="bitacoraService" class="com.arct.parking.service.bitacora.impl.BitacoraServiceImpl">
@@ -17,6 +17,14 @@
 	
 	<bean id="vehiculoService" class="com.arct.parking.service.vehiculo.impl.VehiculoServiceImpl">
 		<property name="vehiculoDAO" ref="vehiculoDAO" > </property>
+	</bean>
+	
+	<bean id="modeloService" class="com.arct.parking.service.modelo.impl.ModeloServiceImpl">
+		<property name="modeloDAO" ref="modeloDAO" > </property>
+	</bean>
+	
+	<bean id="marcaService" class="com.arct.parking.service.marca.impl.MarcaServiceImpl">
+		<property name="marcaDAO" ref="marcaDAO" > </property>
 	</bean>
 	   
 </beans>

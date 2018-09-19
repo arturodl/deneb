@@ -121,8 +121,8 @@ $(document).ready(function() {
 	          "Selected: " + ui.item.label :
 	          "Nothing selected, input was " + this.value); */ 
 	         $('#txtNoPlaca').val(ui.item.noPlaca);
-	         $('#txtMarcaVehiculo').val(ui.item.marca);
-	         $('#txtModeloVehiculo').val(ui.item.modelo);
+	         $('#txtMarcaVehiculo').val(ui.item.modelo.marca.marca);
+	         $('#txtModeloVehiculo').val(ui.item.modelo.modelo);
 	         if( String(ui.item.tipoVehiculo).valueOf() == String('O').valueOf() )
 	         	$('#txtTipoVehiculo').val('Oficial');
 	         else if( String(ui.item.tipoVehiculo).valueOf() == String('N').valueOf() )

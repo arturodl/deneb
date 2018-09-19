@@ -85,7 +85,7 @@
 					<label>Marca</label>
 				</td>
 				<td>
-					<form:input id="txtMarcaVehiculo" path="vehiculo.marca" cssClass="form-control default-font-size" readonly="true"
+					<form:input id="txtMarcaVehiculo" path="vehiculo.modelo.marca.marca" cssClass="form-control default-font-size" readonly="true"
 						placeholder="Sin información"/>
 				</td> 
 			</tr>
@@ -94,7 +94,7 @@
 					<label>Modelo</label>
 				</td>
 				<td>
-					<form:input id="txtModeloVehiculo" path="vehiculo.modelo" cssClass="form-control default-font-size" readonly="true"
+					<form:input id="txtModeloVehiculo" path="vehiculo.modelo.modelo" cssClass="form-control default-font-size" readonly="true"
 						placeholder="Sin información"/>
 				</td> 
 			</tr>

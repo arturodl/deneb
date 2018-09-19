@@ -50,22 +50,28 @@
 		</tr>
 		<tr>
 			<td>
-				<form:label path="marca">
+				<form:label path="modelo.marca.marca">
 					<spring:message text="Marca"/>
 				</form:label>
 			</td>
 			<td> 
-				<form:input id="txtMarca" path="marca" cssClass="form-control default-font-size" disabled="${deshabilitarComponentes}"/>
+				<form:select id="selectMarca" path="modelo.marca.idMarca" cssClass="form-control default-font-size"  disabled="${deshabilitarComponentes}" >
+					<form:option value="-1" label="Seleccione una opción"/>
+					<form:options items="${listaMarcas}" itemLabel="marca" itemValue="idMarca"/>
+				</form:select>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<form:label path="modelo">
+				<form:label path="modelo.modelo">
 					<spring:message text="Modelo"/>
 				</form:label>
 			</td>
 			<td> 
-				<form:input id="txtModelo" path="modelo" cssClass="form-control default-font-size" disabled="${deshabilitarComponentes}"/>
+				<form:select id="selectModelo" path="modelo.idModelo" cssClass="form-control default-font-size" disabled="${deshabilitarComponentes}">
+					<form:option value="-1" label="Sin opciones"/>
+					<form:options items="${listaModelos}" itemLabel="modelo" itemValue="idModelo"/>
+				</form:select>
 			</td> 
 		</tr>	
 		<tr>
@@ -100,9 +106,9 @@
 			</td>
 			<td> 
 				<div class="dropdown">
-					<form:select id="selectTipoVehiculo" path="tipoVehiculo" cssClass="btn btn-secondary dropdown-toggle default-font-size"
+					<form:select id="selectTipoVehiculo" path="tipoVehiculo" cssClass="form-control default-font-size"
 						disabled="${deshabilitarComponentes}">
-					   <form:option value="" label="Seleccione una opcion"/>
+					   <form:option value="" label="Seleccione una opción"/>
 					   <form:option value="O" label="Oficial" />
 					   <form:option value="P" label="Particular" />
 					   <form:option value="R" label="Residente" />
@@ -125,7 +131,10 @@
 					</c:if>
 					<c:if test="${editEnabled}">
 						Modificar
-					</c:if>					
+					</c:if>		
+					<c:if test="${sinOpcion}">
+						Sin Opcion
+					</c:if>				
 				   </button>	
 				   <a class="btn btn-primary default-font-size" href="#" role="button" onclick="getView('<c:url value='/vehiculo/listado' />');">Regresar</a>			   
 				</p>				
