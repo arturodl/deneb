@@ -202,10 +202,10 @@
 								disabled
 							</c:if>
 						>
-							<c:if test="${registro.idRegistro == 0}">
+							<c:if test="${captureCheckIn}">
 								Registrar Entrada
 							</c:if>
-							<c:if test="${registro.idRegistro > 0}">
+							<c:if test="${captureCheckOut}">
 								Registrar Salida
 							</c:if>		
 							<c:if test="${showNoAccess}">

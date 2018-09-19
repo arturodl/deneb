@@ -59,6 +59,7 @@ public class BitacoraController {
 		model.addAttribute("disableBtnExecute", false);
 		model.addAttribute("capturePlateNumber", true);
 		model.addAttribute("showCheckInDatesEnabled", true);
+		model.addAttribute("captureCheckIn", true);
 		model.addAttribute("captureCheckOut", false);
 		return "bitacora/binaccle-manage";
 	}
@@ -113,6 +114,7 @@ public class BitacoraController {
 					model.addAttribute("showCheckInDatesEnabled", true);
 					model.addAttribute("error","No se puede insertar el registro ya que el numero de placa no existe, verifique nuevamente.");
 				}
+				model.addAttribute("captureCheckIn", true);
 				model.addAttribute("captureCheckOut", false);
 				
 			}else if(registro.getIdRegistro() > 0){

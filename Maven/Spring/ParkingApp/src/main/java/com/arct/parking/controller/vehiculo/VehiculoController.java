@@ -39,9 +39,15 @@ public class VehiculoController {
 	  binder.registerCustomEditor(Date.class, orderDateEditor);
 	}
 	
+	@ModelAttribute // This is for always setting values by default
+	public void addAttributes(ModelMap model){
+		
+	}
+	
 	@RequestMapping(value="/agregar", method=RequestMethod.GET)
 	public String iniciar(ModelMap model, @ModelAttribute Vehiculo vehiculo) {
-		model.addAttribute("bienvenida","Bienvenido a la Pantalla de Registro de Vehiculos");
+		model.addAttribute("deshabilitarComponentes",false);
+		model.addAttribute("newEnabled",true);
 		return "vehiculo/vehicle-manage";
 	}
 	
@@ -52,9 +58,8 @@ public class VehiculoController {
 		vehiculoABuscar.setIdVehiculo(idVehiculo);
 		
 		model.addAttribute("vehiculo", obtenerVehiculo(vehiculoABuscar));
-		model.addAttribute("mostrarFormulario",true);
-		model.addAttribute("mostrarResumenBitacora", false);
-		
+		model.addAttribute("deshabilitarComponentes",false);
+		model.addAttribute("editEnabled",true);
 		return "vehiculo/vehicle-manage";
 	}
 	
@@ -69,27 +74,24 @@ public class VehiculoController {
 				
 				peticionInsertar.setVehiculo(vehiculo);
 				vehiculoService.insertarVehiculo(peticionInsertar);
-				
-				model.addAttribute("bienvenida","Bienvenido a la Pantalla de Registro de Vehiculos");
-				model.addAttribute("success","El Vehiculo fue registrado con exito, haga click en regresar para ir a la pantalla principal");
-			
+				model.addAttribute("deshabilitarComponentes",true);
+				model.addAttribute("newEnabled",true);
+				model.addAttribute("success","El Vehiculo fue registrado con exito, haga click en regresar para ir a la pantalla principal");			
 			}else {
-				peticionModificar.setVehiculo(vehiculo);
-				
+				peticionModificar.setVehiculo(vehiculo);				
 				vehiculoService.modificarVehiculo(peticionModificar);
-				
-				model.addAttribute("bienvenida","Bienvenido a la Pantalla de Actualización de Vehiculos");
+				model.addAttribute("deshabilitarComponentes",true);
+				model.addAttribute("editEnabled",true);
 				model.addAttribute("success","La Vehiculo fue modificado con exito, haga click en regresar para ir a la pantalla principal.");
 			}
 			
 		}catch(Exception e) {
 			System.out.println("Hubo un error al invocar VehiculosService.insertarVehiculo, favor de checar el log: "+e.getCause());
+			model.addAttribute("deshabilitarComponentes",true);
 			model.addAttribute("error","Hubo un error al invocar VehiculoService.insertarVehiculo: "+e.getCause());
 			e.printStackTrace();
 		}
 		
-		model.addAttribute("mostrarFormulario",true);
-								
 		return "vehiculo/vehicle-manage";
 	}		
 	
@@ -102,8 +104,7 @@ public class VehiculoController {
 			vehiculo = new Vehiculo();
 			peticion.setVehiculo(vehiculo);
 			respuesta = vehiculoService.obtenerVehiculo(peticion);
-			model.addAttribute("listaVehiculos",respuesta.getListaVehiculos() );
-			model.addAttribute("mostrarEditar",false);
+			model.addAttribute("listaVehiculos",respuesta.getListaVehiculos() );			
 		}catch(Exception e) {
 			System.out.println("Hubo un error al invocar VehiculoService.obtenerVehiculo: "+e.getCause());
 			e.printStackTrace();
