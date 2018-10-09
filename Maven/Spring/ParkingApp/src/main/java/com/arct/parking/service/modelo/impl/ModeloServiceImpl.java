@@ -5,14 +5,13 @@ import com.arct.parking.dto.InsertarModeloPeticion;
 import com.arct.parking.dto.ModificarModeloPeticion;
 import com.arct.parking.dto.ObtenerModeloPeticion;
 import com.arct.parking.dto.ObtenerModeloRespuesta;
-import com.arct.parking.dto.ObtenerVehiculoRespuesta;
 import com.arct.parking.service.modelo.ModeloService;
 
 public class ModeloServiceImpl implements ModeloService {
 	
 	private ModeloDAO modeloDAO;
 
-	@Override
+	@Override	
 	public void insertarModelo(InsertarModeloPeticion peticion) throws Exception {
 		// TODO Auto-generated method stub
 

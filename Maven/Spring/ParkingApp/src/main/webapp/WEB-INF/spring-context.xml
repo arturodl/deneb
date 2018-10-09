@@ -13,5 +13,8 @@
 	
 	<!--  inside components we have both services and daos   -->
 	<import resource="contexts/spring-components.xml"/>
+	
+	<!--  inside security we secure and filter urls    -->
+	<import resource="contexts/spring-security.xml"/>
 
 </beans>

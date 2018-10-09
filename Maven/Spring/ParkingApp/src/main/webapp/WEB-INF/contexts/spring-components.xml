@@ -11,8 +11,8 @@
     <!--  We ask spring to look at DAO package for looking for annotated pojos   -->
     <context:component-scan base-package="com.arct.parking.dao" />
 	
-	<bean id="bitacoraService" class="com.arct.parking.service.bitacora.impl.BitacoraServiceImpl">
-		<property name="registroDAO" ref="registroDAO" > </property>
+	<bean id="bitacoraService" class="com.arct.parking.service.bitacora.impl.BitacoraServiceImpl" >
+		<property name="registroDAO" ref="registroDAO" > </property>		
 	</bean>
 	
 	<bean id="vehiculoService" class="com.arct.parking.service.vehiculo.impl.VehiculoServiceImpl">
@@ -25,6 +25,10 @@
 	
 	<bean id="marcaService" class="com.arct.parking.service.marca.impl.MarcaServiceImpl">
 		<property name="marcaDAO" ref="marcaDAO" > </property>
+	</bean>
+	
+	<bean id="usuarioService" class="com.arct.parking.service.usuario.impl.UsuarioServiceImpl">
+		<property name="usuarioDAO" ref="usuarioDAO" > </property>
 	</bean>
 	   
 </beans>

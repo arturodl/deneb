@@ -37,6 +37,12 @@ public class ModeloController {
 	
 		return respuesta;
 	}
+	
+	@RequestMapping(value="/testSecurity", method = RequestMethod.GET)
+	@ResponseBody
+	public String testModelo() {
+		return "Welcome to modelo";
+	}
 
 	public ModeloService getModeloService() {
 		return modeloService;

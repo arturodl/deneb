@@ -23,8 +23,9 @@ public class ObtenerMarcaPeticion implements Serializable {
 	}
 
 	@JsonSetter("marca")
-	@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, 
-			  	  property = "@type")
+	@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY,
+			  	  property = "@type"
+				 )
 	@JsonSubTypes({
 		@JsonSubTypes.Type(value=Marca.class, name = "Marca")		
 	})

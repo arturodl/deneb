@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+	<http create-session="stateless" use-expressions="true" >	
+		<intercept-url pattern="/**/test**" access="hasAnyRole('ROLE_USER')"  />				
+		<http-basic entry-point-ref="customBasicAuthenticationEntryPoint"/>	
+		<access-denied-handler ref="customAccessDeniedHandler" />	
+		<csrf disabled="true" />
+	</http>
+
+	<authentication-manager >
+	    <authentication-provider user-service-ref="customUserDetailsService" >
+	    </authentication-provider>
+	</authentication-manager>
+	
+	<beans:bean id="customUserDetailsService" 
+                class="com.arct.parking.application.security.CustomUserDetailsService">		
+	</beans:bean>
+	
+	<beans:bean id="customBasicAuthenticationEntryPoint" 
+                class="com.arct.parking.application.security.CustomBasicAuthenticationEntryPoint">		
+	</beans:bean>
+	
+	<beans:bean id="customAccessDeniedHandler" 
+                class="com.arct.parking.application.security.CustomAccessDeniedHandler">		
+	</beans:bean>
+
+</beans:beans>

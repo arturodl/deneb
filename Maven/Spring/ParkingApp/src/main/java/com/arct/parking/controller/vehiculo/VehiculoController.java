@@ -104,7 +104,7 @@ public class VehiculoController {
 				vehiculoService.modificarVehiculo(peticionModificar);
 				model.addAttribute("deshabilitarComponentes",true);
 				model.addAttribute("editEnabled",true);
-				model.addAttribute("success","La Vehiculo fue modificado con exito, haga click en regresar para ir a la pantalla principal.");
+				model.addAttribute("success","El Vehiculo fue modificado con exito, haga click en regresar para ir a la pantalla principal.");
 			}
 			model.addAttribute("listaMarcas", obtenerMarcas() );
 			model.addAttribute("listaModelos", obtenerModelos(idMarca) );
