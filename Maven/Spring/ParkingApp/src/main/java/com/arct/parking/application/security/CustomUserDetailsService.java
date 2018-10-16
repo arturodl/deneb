@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.arct.parking.dto.ObtenerUsuariosPorCriterioPeticion;
 import com.arct.parking.model.Usuario;
@@ -29,7 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 		Usuario usuario = obtenerUsuarioPorNombre(username);
 		
 		List<GrantedAuthority> authorities = buildUserAuthority(usuario.getUsuarioRoles());
-
+		
 		return buildUserForAuthentication(usuario, authorities);		
 	}
 	

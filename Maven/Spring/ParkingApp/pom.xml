@@ -15,6 +15,8 @@
   	<aspectj-version>1.7.4</aspectj-version>
 	<slf4j-version>1.7.5</slf4j-version>
 	<jackson-version>2.7.5</jackson-version>
+	<jwt-version>0.7.0</jwt-version>
+	<jetty-config-sources>src/main/resources/jetty-config</jetty-config-sources>
   </properties>
   
   <dependencies>
@@ -99,6 +101,13 @@
 	    <groupId>com.fasterxml.jackson.core</groupId>
 	    <artifactId>jackson-databind</artifactId>
 	    <version>${jackson-version}</version>
+	</dependency>
+	
+	<!-- JSON Web Token -->
+	<dependency>
+		<groupId>io.jsonwebtoken</groupId>
+		<artifactId>jjwt</artifactId>
+		<version>${jwt-version}</version>
 	</dependency>
 	
 	<!-- Apache Commons DBCP -->
@@ -202,14 +211,31 @@
 				</plugin>
 				
 				<plugin>
+				    <groupId>org.codehaus.mojo</groupId>
+				    <artifactId>keytool-maven-plugin</artifactId>
+				    <version>1.5</version>
+				    <configuration>
+				        <keystore>${project.basedir}/src/main/config/jetty-ssl.keystore</keystore>
+				        <dname>cn=localhost</dname>
+				        <!--Both `keypass` and `storepass` must be at least 6 characters long. -->
+				        <keypass>jetty9</keypass>
+				        <storepass>jetty9</storepass>
+				        <alias>jetty9</alias>
+				        <keyalg>RSA</keyalg>
+				        <validity>99999</validity>				        
+				    </configuration>
+				</plugin>
+				
+				<plugin>
 					<groupId>org.eclipse.jetty</groupId>
 					<artifactId>jetty-maven-plugin</artifactId>
-					<version>9.2.11.v20150529</version>
+					<version>9.2.11.v20150529</version>					
 					<configuration>
-						<scanIntervalSeconds>10</scanIntervalSeconds>
+						<scanIntervalSeconds>5</scanIntervalSeconds>
 						<webApp>
 							<contextPath>/ParkingApp</contextPath>
-						</webApp>
+						</webApp>						
+					    <jettyXml>${jetty-config-sources}/jetty.xml,${jetty-config-sources}/jetty-ssl.xml,${jetty-config-sources}/jetty-https.xml</jettyXml>						    								 											
 					</configuration>
 				</plugin>
 				

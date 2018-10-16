@@ -7,14 +7,15 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
-	<http create-session="stateless" use-expressions="true" >	
-		<intercept-url pattern="/**/test**" access="hasAnyRole('ROLE_USER')"  />				
-		<http-basic entry-point-ref="customBasicAuthenticationEntryPoint"/>	
+   	<http create-session="stateless" use-expressions="true" entry-point-ref="customBasicAuthenticationEntryPoint"  >
+		<intercept-url pattern="/**/test**" access="hasAnyRole('ROLE_USER')"  />		 		
 		<access-denied-handler ref="customAccessDeniedHandler" />	
+		<custom-filter before="FORM_LOGIN_FILTER" ref="customUsernamePasswordAuthenticationFilter"/>
+		<custom-filter before="BASIC_AUTH_FILTER" ref="customBasicAuthenticationFilter"/>				 	
 		<csrf disabled="true" />
 	</http>
 
-	<authentication-manager >
+	<authentication-manager id="authenticationManager" >
 	    <authentication-provider user-service-ref="customUserDetailsService" >
 	    </authentication-provider>
 	</authentication-manager>
@@ -29,6 +30,17 @@
 	
 	<beans:bean id="customAccessDeniedHandler" 
                 class="com.arct.parking.application.security.CustomAccessDeniedHandler">		
+	</beans:bean>
+	
+	<beans:bean id="customBasicAuthenticationFilter" 
+                class="com.arct.parking.application.security.CustomBasicAuthenticationFilter">	
+          <beans:constructor-arg index="0" ref="authenticationManager"></beans:constructor-arg>	
+          <beans:constructor-arg index="1" ref="customBasicAuthenticationEntryPoint"></beans:constructor-arg>
+	</beans:bean>
+	
+	<beans:bean id="customUsernamePasswordAuthenticationFilter"
+				 class="com.arct.parking.application.security.CustomUsernamePasswordAuthenticationFilter">	
+          <beans:constructor-arg index="0" ref="authenticationManager"></beans:constructor-arg>         
 	</beans:bean>
 
 </beans:beans>
