@@ -46,7 +46,8 @@ ni a nivel de base de datos. Un happy path seria el siguiente:
 * Hacer click en el boton Ver Listado para ver todos los registros disponibles
 
 ### Algunas imagenes de la aplicacion corriendo
-![ Img1 ](https://github.com/arturodl/deneb/blob/master/Maven/Spring/ParkingApp/img/Parking-app-arcts-01.jpg)
-![ Img2 ](https://github.com/arturodl/deneb/blob/master/Maven/Spring/ParkingApp/img/Parking-app-arcts-02.jpg)
-![ Img3 ](https://github.com/arturodl/deneb/blob/master/Maven/Spring/ParkingApp/img/Parking-app-arcts-03.jpg)
-![ Img4 ](https://github.com/arturodl/deneb/blob/master/Maven/Spring/ParkingApp/img/Parking-app-arcts-04.jpg)
+![ Img1 ](https://github.com/arturodl/deneb/blob/master/Maven/Spring/ParkingApp/img/Parking-app-arcts-v02-002.jpg)
+![ Img2 ](https://github.com/arturodl/deneb/blob/master/Maven/Spring/ParkingApp/img/Parking-app-arcts-v02-003.jpg)
+![ Img3 ](https://github.com/arturodl/deneb/blob/master/Maven/Spring/ParkingApp/img/Parking-app-arcts-v02-005.jpg)
+![ Img4 ](https://github.com/arturodl/deneb/blob/master/Maven/Spring/ParkingApp/img/Parking-app-arcts-v02-006.jpg)
+![ Img5 ](https://github.com/arturodl/deneb/blob/master/Maven/Spring/ParkingApp/img/Parking-app-arcts-v02-007.jpg)
