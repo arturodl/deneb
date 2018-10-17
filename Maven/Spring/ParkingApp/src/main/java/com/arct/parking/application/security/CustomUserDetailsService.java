@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.arct.parking.dto.ObtenerUsuariosPorCriterioPeticion;
 import com.arct.parking.model.Usuario;
 import com.arct.parking.model.UsuarioRole;
-import com.arct.parking.service.usuario.UsuarioService;
+import com.arct.parking.service.security.UsuarioService;
 
 public class CustomUserDetailsService implements UserDetailsService{
 	
