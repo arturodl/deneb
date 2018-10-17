@@ -1,4 +1,4 @@
-package com.arct.parking.model;
+package com.arct.parking.model.security;
 
 import java.util.List;
 
@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.arct.parking.model.Entidad;
 
 @Entity
 @Table(name="User")

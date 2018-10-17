@@ -29,12 +29,12 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value>com.arct.parking.model.Registro</value>
-				<value>com.arct.parking.model.Vehiculo</value>
-				<value>com.arct.parking.model.Marca</value>
-				<value>com.arct.parking.model.Modelo</value>
-				<value>com.arct.parking.model.Usuario</value>
-				<value>com.arct.parking.model.UsuarioRole</value>
+				<value>com.arct.parking.model.parking.Registro</value>
+				<value>com.arct.parking.model.parking.Vehiculo</value>
+				<value>com.arct.parking.model.parking.Marca</value>
+				<value>com.arct.parking.model.parking.Modelo</value>
+				<value>com.arct.parking.model.security.Usuario</value>
+				<value>com.arct.parking.model.security.UsuarioRole</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

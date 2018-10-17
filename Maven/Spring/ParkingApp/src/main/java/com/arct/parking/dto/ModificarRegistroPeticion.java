@@ -1,6 +1,6 @@
 package com.arct.parking.dto;
 
-import com.arct.parking.model.Registro;
+import com.arct.parking.model.parking.Registro;
 
 public class ModificarRegistroPeticion {
 	private Registro registro;

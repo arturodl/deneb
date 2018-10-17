@@ -2,7 +2,7 @@ package com.arct.parking.dto;
 
 import java.io.Serializable;
 
-import com.arct.parking.model.Marca;
+import com.arct.parking.model.parking.Marca;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

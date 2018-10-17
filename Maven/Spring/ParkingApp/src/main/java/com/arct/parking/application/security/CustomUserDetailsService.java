@@ -15,8 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.arct.parking.dto.ObtenerUsuariosPorCriterioPeticion;
-import com.arct.parking.model.Usuario;
-import com.arct.parking.model.UsuarioRole;
+import com.arct.parking.model.security.Usuario;
+import com.arct.parking.model.security.UsuarioRole;
 import com.arct.parking.service.security.UsuarioService;
 
 public class CustomUserDetailsService implements UserDetailsService{

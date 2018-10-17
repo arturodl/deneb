@@ -17,7 +17,7 @@ import com.arct.parking.dto.ModificarModeloPeticion;
 import com.arct.parking.dto.ModificarModeloRespuesta;
 import com.arct.parking.dto.ObtenerModeloPeticion;
 import com.arct.parking.dto.ObtenerModeloRespuesta;
-import com.arct.parking.model.Modelo;
+import com.arct.parking.model.parking.Modelo;
 
 @Repository(value="modeloDAO")
 public class ModeloDAOImpl implements ModeloDAO {

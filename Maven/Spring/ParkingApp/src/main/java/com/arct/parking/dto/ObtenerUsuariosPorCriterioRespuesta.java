@@ -3,7 +3,7 @@ package com.arct.parking.dto;
 import java.io.Serializable;
 import java.util.List;
 
-import com.arct.parking.model.Usuario;
+import com.arct.parking.model.security.Usuario;
 
 public class ObtenerUsuariosPorCriterioRespuesta implements Serializable{
 

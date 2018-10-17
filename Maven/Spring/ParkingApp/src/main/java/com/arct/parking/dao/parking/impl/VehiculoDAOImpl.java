@@ -14,7 +14,7 @@ import com.arct.parking.dto.InsertarVehiculoPeticion;
 import com.arct.parking.dto.ModificarVehiculoPeticion;
 import com.arct.parking.dto.ObtenerVehiculoPeticion;
 import com.arct.parking.dto.ObtenerVehiculoRespuesta;
-import com.arct.parking.model.Vehiculo;
+import com.arct.parking.model.parking.Vehiculo;
 
 @Repository(value="vehiculoDAO")
 public class VehiculoDAOImpl implements VehiculoDAO {

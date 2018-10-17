@@ -1,4 +1,4 @@
-package com.arct.parking.model;
+package com.arct.parking.model.security;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.arct.parking.model.Entidad;
 
 @Entity
 @Table(name="User_role")

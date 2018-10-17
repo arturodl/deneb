@@ -14,7 +14,7 @@ import com.arct.parking.dto.InsertarRegistroPeticion;
 import com.arct.parking.dto.ModificarRegistroPeticion;
 import com.arct.parking.dto.ObtenerRegistroPeticion;
 import com.arct.parking.dto.ObtenerRegistroRespuesta;
-import com.arct.parking.model.Registro;
+import com.arct.parking.model.parking.Registro;
 
 @Repository(value="registroDAO")
 public class RegistroDAOImpl implements RegistroDAO {

@@ -1,4 +1,4 @@
-package com.arct.parking.model;
+package com.arct.parking.model.parking;
 
 import java.util.Date;
 
@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.arct.parking.model.Entidad;
 
 @Entity
 @Table(name="Registro")

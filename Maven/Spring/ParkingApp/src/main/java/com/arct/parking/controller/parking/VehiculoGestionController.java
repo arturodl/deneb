@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.arct.parking.model.Vehiculo;
+import com.arct.parking.model.parking.Vehiculo;
 
 @Controller
 @RequestMapping(value="/vehiculo/gestion")

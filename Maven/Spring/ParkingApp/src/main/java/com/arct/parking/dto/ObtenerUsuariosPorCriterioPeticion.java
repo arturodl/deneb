@@ -2,7 +2,7 @@ package com.arct.parking.dto;
 
 import java.io.Serializable;
 
-import com.arct.parking.model.Usuario;
+import com.arct.parking.model.security.Usuario;
 
 public class ObtenerUsuariosPorCriterioPeticion implements Serializable{
 

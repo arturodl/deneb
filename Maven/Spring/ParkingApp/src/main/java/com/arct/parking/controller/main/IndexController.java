@@ -11,8 +11,8 @@ import com.arct.parking.dto.ObtenerRegistroPeticion;
 import com.arct.parking.dto.ObtenerRegistroRespuesta;
 import com.arct.parking.dto.ObtenerVehiculoPeticion;
 import com.arct.parking.dto.ObtenerVehiculoRespuesta;
-import com.arct.parking.model.Registro;
-import com.arct.parking.model.Vehiculo;
+import com.arct.parking.model.parking.Registro;
+import com.arct.parking.model.parking.Vehiculo;
 import com.arct.parking.service.parking.BitacoraService;
 import com.arct.parking.service.parking.VehiculoService;
 

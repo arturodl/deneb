@@ -1,6 +1,6 @@
 package com.arct.parking.dto;
 
-import com.arct.parking.model.Vehiculo;
+import com.arct.parking.model.parking.Vehiculo;
 
 public class ModificarVehiculoPeticion {
 	private Vehiculo vehiculo;

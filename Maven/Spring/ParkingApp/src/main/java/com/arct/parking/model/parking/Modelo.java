@@ -1,4 +1,4 @@
-package com.arct.parking.model;
+package com.arct.parking.model.parking;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,6 +18,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+
+import com.arct.parking.model.Entidad;
 
 @Entity
 @Table(name="Modelo")

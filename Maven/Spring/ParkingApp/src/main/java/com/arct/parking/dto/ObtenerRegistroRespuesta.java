@@ -2,7 +2,7 @@ package com.arct.parking.dto;
 
 import java.util.List;
 
-import com.arct.parking.model.Registro;
+import com.arct.parking.model.parking.Registro;
 
 public class ObtenerRegistroRespuesta {
 	private List<Registro> listaRegistros;

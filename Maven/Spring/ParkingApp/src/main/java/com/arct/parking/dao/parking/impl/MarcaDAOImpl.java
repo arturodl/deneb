@@ -17,7 +17,7 @@ import com.arct.parking.dto.ModificarMarcaPeticion;
 import com.arct.parking.dto.ModificarMarcaRespuesta;
 import com.arct.parking.dto.ObtenerMarcaPeticion;
 import com.arct.parking.dto.ObtenerMarcaRespuesta;
-import com.arct.parking.model.Marca;
+import com.arct.parking.model.parking.Marca;
 
 @Repository(value="marcaDAO")
 public class MarcaDAOImpl implements MarcaDAO {

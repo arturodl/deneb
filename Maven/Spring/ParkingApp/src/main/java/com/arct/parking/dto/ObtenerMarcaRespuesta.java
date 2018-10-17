@@ -3,7 +3,7 @@ package com.arct.parking.dto;
 import java.io.Serializable;
 import java.util.List;
 
-import com.arct.parking.model.Marca;
+import com.arct.parking.model.parking.Marca;
 
 public class ObtenerMarcaRespuesta implements Serializable {
 	

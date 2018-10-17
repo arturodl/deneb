@@ -17,7 +17,7 @@ import com.arct.parking.dto.ModificarUsuarioPeticion;
 import com.arct.parking.dto.ModificarUsuarioRespuesta;
 import com.arct.parking.dto.ObtenerUsuariosPorCriterioPeticion;
 import com.arct.parking.dto.ObtenerUsuariosPorCriterioRespuesta;
-import com.arct.parking.model.Usuario;
+import com.arct.parking.model.security.Usuario;
 
 @Repository(value="usuarioDAO")
 public class UsuarioDAOImpl implements UsuarioDAO {
