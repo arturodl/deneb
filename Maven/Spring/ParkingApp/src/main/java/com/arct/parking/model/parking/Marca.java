@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.arct.parking.model.Entidad;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="Marca")
@@ -37,6 +38,7 @@ public class Marca extends Entidad implements Serializable{
 	@Column(name="fechaAlta")
 	@Temporal(TemporalType.DATE)
 	@Basic(optional=false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date fechaAlta;
 
 	public Integer getIdMarca() {
